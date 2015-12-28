@@ -1,0 +1,8 @@
+<h3>Create a Topic:</h3>
+
+<br>Topics are things like Spanish, Algebra, C#, etc. Things you would generally call subjects in school. <br><br>
+
+<form action="/topics/<%= @category.id %>/create" method="POST">
+  <input type="text" name="name">
+  <input type="submit" value="Create!">
+</form>

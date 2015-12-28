@@ -1,0 +1,13 @@
+<h3>Index</h3>
+
+Topics currently available:
+<% if @topics == []
+  else%>
+  <a href="/categories/index">Choose a category to make a NEW topic!</a>
+<% @topics.each do |topics| %>
+  <br><a href="/topics/<%=topics.id%>"><%= topics.name %></a>
+<% end %>
+<% end %>
+
+<br><br><a href="/categories/index">Categories</a>
+<br><a href="/">Home</a>

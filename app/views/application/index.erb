@@ -3,7 +3,25 @@
   <head>
   </head>
   <body>
-    Welcome to the Pre-Learning Resource Guide.
-  </body>
+    <% if @user %>
+      <%= @user.first_name %>, welcome to the Pre-learning Resource Guide.
+    <br><a href="/logout">Log-out</a>
+    <% else %>
+      Welcome to the Pre-Learning Resource Guide.
+    <br><a href="/login">Log-in</a>
+    <a href="/signup">Sing-up</a>
+    <% end %>
 
+
+    <h3><a href="/categories/index">Categories Index</a></h3>
+      <p>(spoken language, computer languages, science, etc.)</p>
+      <p>Select a topic to find the resources people found most effective for learning that topic.</p>
+    <h3><a href="/topics/index">Topics Index</a></h3>
+      <p>(Mandarin, Algebra, Ruby, etc.)</p>
+      <p>Select a topic to find the resources people found most effective for learning that topic.</p>
+    <h3><a href="/resources/index">Resource Index</a></h3>
+      <p>Find a resource you heard about</p>
+    <h3><a href="/users/index">User Index</a></h3>
+      <p>Search for a user. Maybe you're friends, or you're curious what they are up to?</p>
+  </body>
 </html>

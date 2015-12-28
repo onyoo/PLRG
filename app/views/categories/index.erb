@@ -1,0 +1,36 @@
+<h3>Index</h3>
+
+<% if @categories == [] %>
+    
+    No categories yet... <a href="/categories/create">Want to make one?</a>
+
+<% else %>
+
+  <% if @create %>
+
+    <a href="/categories/create">Create a new category!</a><br><br>
+
+  <% end %>
+
+  Categories currently available:
+
+  <% if @categories == [] %>
+
+  Well this is emberrassing. There are none to show at the moment... <a href="/categories/create">Want to make one?</a>
+
+  <% else %>
+
+  <form action="/categories/delete" method="POST">
+    <% @categories.each do |category| %>
+      <br><a href="/categories/<%=category.id%>"><%= category.name %></a>
+      <% if @edit %>
+        Delete<input type="checkbox" name="delete_categories[<%=category.id%>]">
+      <% end %>
+    <% end %>
+    <br><br><input type="submit" value="submit">
+  </form>
+
+  <a href="/">Home</a>
+
+  <% end %>
+<% end %>

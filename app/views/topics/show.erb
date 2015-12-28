@@ -1,0 +1,36 @@
+<h3>Welcome to the <%= @topic.name %> resource page!</h3>
+
+<a href="/resources/<%= @topic.id %>/create">Add a fantastic resource for learning <%= @topic.name %>!</a><br><br>
+
+<% if @resources == [] %>
+    No resources yet... <a href="/resources/<%= @topic.id %>/create">Want to make one?</a>
+<% else %>
+
+  Resources currently available:
+
+  <% if @resources == [] %>
+
+    Well this is emberrassing. There are none to show at the moment... <a href="/resources/<%= @topic.id %>/create">Want to make one?</a>
+
+  <%else%>
+
+  <form action="/resources/delete" method="POST">
+    <% @resources.each do |resource| %>
+    
+      <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
+      <% if @edit %>
+          Delete<input type="checkbox" name="delete_resources[<%=resource.id%>]">
+      <% end %>
+
+    <% end %>
+    
+    <br><br><input type="submit" value="delete selected">
+  </form>
+
+  <% end %>
+<% end %>
+
+  <br><br>
+  <a href="/categories/<%= @topic.category_id %>"><%= @category.name %> Resources</a><br>
+  <a href="/categories/index">Category Index</a><br>
+  <a href="/">Home</a>

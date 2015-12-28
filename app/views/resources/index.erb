@@ -1,0 +1,11 @@
+<h3>Index</h3>
+
+Resources currently recommended:
+<% if @resources == []
+  else%>
+
+  
+<% @resources.each do |resource| %>
+  <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
+<% end %>
+<% end %>
