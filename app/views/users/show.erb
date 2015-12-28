@@ -1,15 +1,20 @@
 
-Categories: <br>
-<% @categories.each do |cat|%>
-  <%= cat.name %> <br>
+Categories Added: <br>
+<% @categories.each do |category|%>
+  <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
 <% end %>
-
-Topics: <br>
+<br>
+Topics Added: <br>
 <% @topics.each do |topic|%>
-  <%= topic.name %> <br>
+  <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
+<% end %>
+<br>
+Resources Added: <br>
+<% @resources.each do |resource|%>
+  <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
 <% end %>
 
-Resources: <br>
-<% @resources.each do |resource|%>
-  <%= resource.name %> <br>
-<% end %>
+  <br><br>
+  <a href="/categories/index">Category Index</a><br>
+  <a href="/users/index">User Index</a><br>
+  <a href="/">Home</a>
