@@ -5,11 +5,9 @@
   <body>
     <% if @user %>
       <%= @user.first_name %>, welcome to the Pre-learning Resource Guide.
-    <br><a href="/logout">Log-out</a>
     <% else %>
-      Welcome to the Pre-Learning Resource Guide.
-    <br><a href="/login">Log-in</a>
-    <a href="/signup">Sing-up</a>
+      Welcome to the Pre-Learning Resource Guide. <br>
+      Please Log-in to have full access to the great resources on this site.
     <% end %>
 
 

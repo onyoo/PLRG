@@ -1,20 +1,23 @@
+<h3><%= @user.username %>'s contributions:</h3>
 
 Categories Added: <br>
-<% @categories.each do |category|%>
+<% @categories.uniq.each do |category|%>
   <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
 <% end %>
 <br>
 Topics Added: <br>
-<% @topics.each do |topic|%>
+<% @topics.uniq.each do |topic|%>
   <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
 <% end %>
 <br>
 Resources Added: <br>
+
 <% @resources.each do |resource|%>
   <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
 <% end %>
 
   <br><br>
-  <a href="/categories/index">Category Index</a><br>
+  
   <a href="/users/index">User Index</a><br>
-  <a href="/">Home</a>
+  <br><a href="/">Home</a>
+  

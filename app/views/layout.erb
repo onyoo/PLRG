@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>PLRG</title>
+  </head>
+  <body>
+    <nav>
+      <% if logged_in? %>
+
+        <a href="/">Home</a> -
+        <a href="/logout"> Log-out </a>
+        <p>Good to see you today, <%=current_user.first_name %></p>
+
+      <% else %>
+        <a href="/signup">Sign-up</a>
+        <a href="/login"> Log-in </a>
+      <%end %>
+
+    </nav>
+    <div class="container">
+      <h1>Pre-Learning Resource Guide</h1>
+      <% if !@error_message.nil? %>
+      <div class="alert alert-warning">
+        <%= @error_message %>
+      </div>
+    <% end %>
+
+
+      <%= yield %> 
+
+      
+    <br><br><br>
+    <div>This site, made possible by you.</div>
+    </div>
+  </body>
+</html>

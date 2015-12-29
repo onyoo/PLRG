@@ -14,7 +14,7 @@
 
   <%else%>
 
-  <form action="/resources/delete" method="POST">
+  <form action="/resources/delete<%= @topic.id %>" method="POST">
     <% @resources.each do |resource| %>
     
       <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
@@ -23,8 +23,7 @@
       <% end %>
 
     <% end %>
-    
-    <br><br><input type="submit" value="delete selected">
+    <br><br><input type="submit" value="Submit Deletions">
   </form>
 
   <% end %>
@@ -33,4 +32,4 @@
   <br><br>
   <a href="/categories/<%= @topic.category_id %>"><%= @category.name %> Resources</a><br>
   <a href="/categories/index">Category Index</a><br>
-  <a href="/">Home</a>
+  <br><a href="/">Home</a>

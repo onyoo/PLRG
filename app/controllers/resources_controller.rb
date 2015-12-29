@@ -8,6 +8,9 @@ class ResourcesController < ApplicationController
     if logged_in?
       @create
     end
+    if session[:id] == 4
+      @edit = 1
+    end
     @resources = Resource.all
     erb :'/resources/index'
   end
@@ -37,16 +40,12 @@ class ResourcesController < ApplicationController
     end
   end
 
-
-  private
-
-  helpers do
-    def logged_in?
-      !!session[:id]
-    end
-
-    def current_user
-      User.find(session[:id])
+  post "/resources/delete" do
+    if logged_in?
+      binding.pry
+      params[:delete_resources].each{|id| Topic.delete(id)}
+      redirect "/categories/#{params[:id]}"
     end
   end
+
 end

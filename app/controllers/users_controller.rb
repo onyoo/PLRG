@@ -57,32 +57,18 @@ get '/signup' do
   end
 
     get '/users/:id' do
-    if session[:id] == 4
-      @edit = 1
-    end
     if logged_in?
-      @categories = []
-      @resources = []
-      @user = User.find(params[:id])
 
-      @topics = Topic.where(user_id: @user.id)
+      @user = User.find(params[:id])
+      @categories = []
+
+      @topics = @user.topics.uniq
+      @resources = @user.resources.uniq
       @topics.each{|topic| @categories << Category.find(topic.category_id)}
-      @topics.each{|topic| @resources << Resource.find_by(topic_id: topic.id)}
-    
+
     erb :'/users/show'
     else redirect '/login'
     end
   end
 
-  private
-
-  helpers do
-    def logged_in?
-      !!session[:id]
-    end
-
-    def current_user
-      User.find(session[:id])
-    end
-  end
 end

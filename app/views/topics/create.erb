@@ -1,4 +1,4 @@
-<h3>Create a Topic:</h3>
+<h3>Create a topic for <%= @category.name %>:</h3>
 
 <br>Topics are things like Spanish, Algebra, C#, etc. Things you would generally call subjects in school. <br><br>
 
@@ -6,3 +6,4 @@
   <input type="text" name="name">
   <input type="submit" value="Create!">
 </form>
+<a href="/categories/<%= @category.id%>">Cancel</a>
