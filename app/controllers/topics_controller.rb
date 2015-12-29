@@ -45,7 +45,6 @@ class TopicsController < ApplicationController
     if logged_in?
 
       @topics = []
-      @resources = []
 
       params[:delete_topics].each{|k,v| @topics << Topic.find(k)}
 
@@ -55,7 +54,7 @@ class TopicsController < ApplicationController
           Resource.delete(death_row)
         end
       end
-      
+
       @topics.each{|t| Topic.delete(t.id)} unless @topics == [[]]
 
       redirect "/categories/index"

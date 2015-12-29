@@ -7,12 +7,15 @@ class ResourcesController < ApplicationController
   get "/resources/index" do
     if logged_in?
       @create
+      if session[:id] == 4
+        @edit = 1
+      end
+      @resources = Resource.all
+      erb :'/resources/index'
+    else
+      redirect '/login'
     end
-    if session[:id] == 4
-      @edit = 1
-    end
-    @resources = Resource.all
-    erb :'/resources/index'
+    
   end
 
 

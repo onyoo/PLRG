@@ -10,7 +10,6 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       @user = User.find(session[:id])
     end
-    #welcomes user @log-in page
     erb :'/application/index'
   end
 

@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
 
-
   def slug
     self.name.gsub(/\ /,"-").downcase
   end
 
   get "/users/index" do
     if logged_in?
-      @create
+      @users = User.all
+      erb :'/users/index'
+    else
+      redirect '/login'
     end
-    @users = User.all
-    erb :'/users/index'
   end
 
 get '/signup' do
