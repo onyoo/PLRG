@@ -14,7 +14,7 @@
 
   <%else%>
 
-  <form action="/resources/delete<%= @topic.id %>" method="POST">
+  <form action="/resources/delete/<%= @topic.id %>" method="POST">
     <% @resources.each do |resource| %>
     
       <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>

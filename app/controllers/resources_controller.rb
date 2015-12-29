@@ -18,15 +18,20 @@ class ResourcesController < ApplicationController
 
   get '/resources/:id/create' do
     if logged_in?
-      @topic = Topic.find(params[:id])
+      @topic = Topic.find(params[:id]) #Coded also in  post "/resources/:id/create"
       erb :'resources/create'
     end  
   end
 
   post "/resources/:id/create" do
     if logged_in?
-      Resource.create(name: params[:name], url: params[:url], description: params[:description], topic_id: params[:id])
-      redirect "/topics/#{params[:id]}"
+      if params[:name] != "" && params[:url] != "" && params[:description] != "" && params[:id] != ""
+        Resource.create(name: params[:name], url: params[:url], description: params[:description], topic_id: params[:id])
+        redirect "/topics/#{params[:id]}"
+      else
+        @topic = Topic.find(params[:id])
+        erb :'resources/create', :locals => {:message => "*** All fields are mandatory. ***"}
+      end
     else redirect '/login'
     end
   end
@@ -40,11 +45,10 @@ class ResourcesController < ApplicationController
     end
   end
 
-  post "/resources/delete" do
+  post "/resources/delete/:id" do
     if logged_in?
-      binding.pry
-      params[:delete_resources].each{|id| Topic.delete(id)}
-      redirect "/categories/#{params[:id]}"
+      params[:delete_resources].each{|k,v| Resource.delete(k)}
+      redirect "/topics/#{params[:id]}"
     end
   end
 

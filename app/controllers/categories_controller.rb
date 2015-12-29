@@ -42,10 +42,21 @@ class CategoriesController < ApplicationController
       erb :"/categories/show"
   end
 
-  post "/categories/delete/:id" do
+  post "/categories/delete" do
     if logged_in?
-      params[:delete_topics].each{|id| Topic.delete(id)}
-      redirect "/categories/#{params[:id]}"
+      if params[:delete_categories] != {}
+        @topics = []
+        @resources = []
+
+        params[:delete_categories].each{|k,v| @topics << Topic.find_by(category_id: k)}
+        @topics.each{|t| @resources << Resource.where(topic_id: t.id)} unless @topics == [nil]
+
+        binding.pry
+        params[:delete_categories].each{|k,v| Category.delete(k)} 
+        @topics.each{|t| Topic.delete(t.id)} unless @topics == [nil]
+        @resources[0].each{|r| Resource.delete(r.id)} unless @resources == []
+      end
+      redirect "/categories/index"
     end
   end
 

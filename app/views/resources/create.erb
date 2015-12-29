@@ -1,5 +1,9 @@
 Create a Resource:
-<br><br>
+<br>
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+<br>
 <form action="/resources/<%= @topic.id %>/create" method="POST">
   Name:<input type="text" name="name"><br>
   URL:<input type="text" name="url"><br>

@@ -1,6 +1,8 @@
 <h3>Create a topic for <%= @category.name %>:</h3>
 
-<br>Topics are things like Spanish, Algebra, C#, etc. Things you would generally call subjects in school. <br><br>
+<br>Topics are things like Spanish, Algebra, C#, etc. Things you would generally study at school. <br><br>
+
+If a topic with the same name exists in other categories, your topic will not be made!!! Names must be origional :)
 
 <form action="/topics/<%= @category.id %>/create" method="POST">
   <input type="text" name="name">

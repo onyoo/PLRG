@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
   post "/topics/:id/create" do
     if logged_in?
-      Topic.find_or_create_by(name: params[:name], category_id: params[:id], user_id: session[:id])
+      Topic.create(name: params[:name], category_id: params[:id], user_id: session[:id]) unless Topic.find_by(name: params[:name])
       redirect "/categories/#{params[:id]}"
     else redirect '/login'
     end
@@ -38,6 +38,27 @@ class TopicsController < ApplicationController
     @category = Category.find(@topic.category_id)
     erb :'/topics/show'
     else redirect '/login'
+    end
+  end
+
+  post "/topics/delete/:id" do
+    if logged_in?
+
+      @topics = []
+      @resources = []
+
+      params[:delete_topics].each{|k,v| @topics << Topic.find(k)}
+
+      if @topics != [[]]
+        @topics.each do |t|
+          death_row = Resource.where(topic_id: t.id)
+          Resource.delete(death_row)
+        end
+      end
+      
+      @topics.each{|t| Topic.delete(t.id)} unless @topics == [[]]
+
+      redirect "/categories/index"
     end
   end
 
