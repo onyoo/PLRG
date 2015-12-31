@@ -6,10 +6,7 @@ class CategoriesController < ApplicationController
 
   get "/categories/index" do
     if logged_in?
-      @create = 1
-    end
-    if session[:id] == 4
-      @edit = 1
+      @rights = rights(session)
     end
     @categories = Category.all
     erb :'/categories/index'
@@ -32,10 +29,7 @@ class CategoriesController < ApplicationController
 
   get '/categories/:id' do
     if logged_in?
-      @create = 1
-    end
-    if session[:id] == 4
-      @edit = 1
+      @rights = rights(session)
     end
       @category = Category.find(params[:id])
       @topics = Topic.where(category_id: params[:id])

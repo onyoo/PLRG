@@ -5,9 +5,6 @@ class TopicsController < ApplicationController
   end
 
   get "/topics/index" do
-    if logged_in?
-      @create
-    end
     @topics = Topic.all
     erb :'/topics/index'
   end
@@ -28,35 +25,19 @@ class TopicsController < ApplicationController
     end
   end
 
+
   get '/topics/:id' do
-    if session[:id] == 4
-      @edit = 1
-    end
     if logged_in?
-    @topic = Topic.find(params[:id])
-    @resources = Resource.where(topic_id: params[:id])
-    @category = Category.find(@topic.category_id)
-    erb :'/topics/show'
+      @rights = rights(session)
+      @info = Topic.find_environment(params) #returns all categories, topics, and resources in a hash
+      erb :'/topics/show'
     else redirect '/login'
     end
   end
 
   post "/topics/delete/:id" do
     if logged_in?
-
-      @topics = []
-
-      params[:delete_topics].each{|k,v| @topics << Topic.find(k)}
-
-      if @topics != [[]]
-        @topics.each do |t|
-          death_row = Resource.where(topic_id: t.id)
-          Resource.delete(death_row)
-        end
-      end
-
-      @topics.each{|t| Topic.delete(t.id)} unless @topics == [[]]
-
+      Topic.chain_delete(params) # Deletes Topic and Resources owned by that Topic
       redirect "/categories/index"
     end
   end

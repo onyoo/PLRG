@@ -1,45 +1,42 @@
 <h3>Index</h3>
 
-<% if @categories == [] %>
+<% if @rights[:delete] %>
   <div class="create">
-    No categories yet... <a href="/categories/create">Want to make one?</a>
+    <a href="/categories/create">Create a new category!</a><br><br>
+  </div>
+<% end %>
+
+Categories currently available:
+
+<% if @categories == [] && @rights[:delete] %>
+  <div class="create">
+    Well this is emberrassing. There are none to show at the moment... <a href="/categories/create">Want to make one?</a>
   </div>
 
 <% else %>
-  <% if @create %>
-    <div class="create">
-      <a href="/categories/create">Create a new category!</a><br><br>
-    </div>
-  <% end %>
+  <div class="show">
+    <form action="/categories/delete" method="POST">
+      <div class="categories"></div>
+        <% @categories.each do |category| %>
+          <div class="category">
+            <br><a href="/categories/<%=category.id%>"><%= category.name %></a>
+          </div> <!-- .category -->
 
-  Categories currently available:
-
-  <% if @categories == [] %>
-    <div class="create">
-      Well this is emberrassing. There are none to show at the moment... <a href="/categories/create">Want to make one?</a>
-    </div>
-
-  <% else %>
-    <div class="show">
-      <form action="/categories/delete" method="POST">
-        <div class="categories"></div>
-          <% @categories.each do |category| %>
-            <div class="category">
-              <br><a href="/categories/<%=category.id%>"><%= category.name %></a>
-            </div> <!-- .category -->
-
-            <% if @edit %>
-              Delete<input type="checkbox" name="delete_categories[<%=category.id%>]">
-            <% end %>
+          <% if @rights[:delete] %>
+            Delete<input type="checkbox" name="delete_categories[<%=category.id%>]">
           <% end %>
-        </div> <!-- .categories -->
-        <br><br><input type="submit" value="submit deletions">
-      </form>
-    </div> <!-- .show -->
-    
+              <br>
+          <% if @rights[:edit] %>
+            <a href="">Edit Name (no link yet)</a>
+          <% end %>
+
+        <% end %>
+      </div> <!-- .categories -->
+      <br><br><input type="submit" value="submit deletions">
+    </form>
+  </div> <!-- .show -->
+  
   <div class="helper_links">
     <br><a href="/">Home</a>
   </div>
-
-  <% end %>
 <% end %>

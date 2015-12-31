@@ -14,7 +14,7 @@ Shows all the topics in a category
   </div>
 
 <% else %>
-  <% if @create %>
+  <% if @rights[:edit] %>
     <div class="create">
       <a href="/topics/<%= @category.id %>/create">Create a new topic!</a>
     </div>
@@ -33,12 +33,18 @@ Shows all the topics in a category
       <div class="topic">
         <br><a href="/topics/<%=topic.id%>"><%= topic.name %></a>
       </div>
-      <% if @edit %>
+      <% if @rights[:delete] %>
           Delete<input type="checkbox" name="delete_topics[<%=topic.id%>]">
       <% end %>
 
+      <% if @rights[:edit] %>
+          <a href="">Edit (no link) </a>
+      <% end %>
+
     <% end %>
-    <br><br><input type="submit" value="submit deletions">
+    <% if @rights[:delete] %>
+      <br><br><input type="submit" value="submit deletions">
+    <% end %>
   </form>
   <% end %>
 <% end %>

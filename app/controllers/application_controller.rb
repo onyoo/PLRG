@@ -1,5 +1,5 @@
 class ApplicationController < Sinatra::Base
-hi
+
   configure do
     set :views, 'app/views/'
     enable :sessions
@@ -24,6 +24,29 @@ hi
     def current_user
       User.find(session[:id])
     end
+
+    def delete?(session)
+      User.find(session[:id]).member_status == "Grand Master"
+    end
+
+    def edit?(session)
+      User.find(session[:id]).member_status == "Grand Master" ||
+      User.find(session[:id]).member_status == "Legend";
+    end
+
+    def create?(session)
+      User.find(session[:id]).member_status == "Grand Master" ||
+      User.find(session[:id]).member_status == "Legend" ||
+      User.find(session[:id]).member_status == "Monk"
+    end
+
+    def rights(session)
+      create = true if create?(session)
+      edit = true if edit?(session)
+      delete = true if delete?(session)
+      {create: create, edit: edit, delete: delete}
+    end
+
   end
 
 end

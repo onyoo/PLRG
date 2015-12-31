@@ -6,10 +6,10 @@ class ResourcesController < ApplicationController
 
   get "/resources/index" do
     if logged_in?
-      @create
-      if session[:id] == 4
-        @edit = 1
-      end
+      @create = 1 if create?(session)
+      @edit = 1 if edit?(session)
+      @delete = 1 if delete?(session)
+      
       @resources = Resource.all
       erb :'/resources/index'
     else

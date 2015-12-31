@@ -1,45 +1,38 @@
-<h3>Welcome to the <%= @topic.name %> resource page!</h3>
+<h3>Welcome to the <%= @info[:topic].name %> resource page!</h3>
 
 <div class="create">
-  <a href="/resources/<%= @topic.id %>/create">Add a fantastic resource for learning <%= @topic.name %>!</a><br><br>
+  <a href="/resources/<%= @info[:topic].id %>/create">Add a fantastic resource for learning <%= @info[:topic].name %>!</a><br><br>
 </div>
 
-<% if @resources == [] %>
-  <div class="create">
-    No resources yet... <a href="/resources/<%= @topic.id %>/create">Want to make one?</a>
-  </div>
+Resources currently available:
 
-<% else %>
+<div class="form">
+  <form action="/resources/delete/<%= @info[:topic].id %>" method="POST">
+    <% @info[:resources].each do |resource| %>
+    
+      <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
+          <br>
+      <% if @rights[:delete] %>
+          Delete<input type="checkbox" name="delete_resources[<%=resource.id%>]">
+      <% end %>
+          <br>
+      <% if @rights[:edit] %>
+          <a href="">edit (no link yet)</a>
+      <% end %>
+          <br><br>
+    <% end %>
 
-  Resources currently available:
+    <% if @rights[:delete] %>
+      <br><br><input type="submit" value="Submit Deletions">
+    <% end %>
 
-  <% if @resources == [] %>
-    <div class="create">
-      Well this is emberrassing. There are none to show at the moment... <a href="/resources/<%= @topic.id %>/create">Want to make one?</a>
-    </div>
-
-  <%else%>
-    <div class="form">
-      <form action="/resources/delete/<%= @topic.id %>" method="POST">
-        <% @resources.each do |resource| %>
-        
-          <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
-          <% if @edit %>
-              Delete<input type="checkbox" name="delete_resources[<%=resource.id%>]">
-          <% end %>
-
-        <% end %>
-        <br><br><input type="submit" value="Submit Deletions">
-      </form>
-    </div> <!-- .form -->
-
-  <% end %>
-<% end %>
+  </form>
+</div> <!-- .form -->
 
 <br><br>
 
 <div class="helper_links">
-  <a href="/categories/<%= @topic.category_id %>"><%= @category.name %> Resources</a><br>
+  <a href="/categories/<%= @info[:topic].category_id %>"><%= @info[:category].name %> Resources</a><br>
   <a href="/categories/index">Category Index</a><br>
   <br><a href="/">Home</a>
 </div>
