@@ -1,12 +1,17 @@
 <h3>Index</h3>
 
 PLRG's lovely users:
-<% if @users == []
-  else%>
-<% @users.each do |user| %>
-  <br><a href="/users/<%=user.id%>"><%= user.username %></a>
-<% end %>
+<% if @users == [] %>
+  <% else %>
+  <% @users.each do |user| %>
+    <div class="user">
+      <br><a href="/users/<%=user.id%>"><%= user.username %></a>
+    </div>
+  <% end %>
 <% end %>
 
 <br><br>
-<a href="/">Home</a>
+
+<div class="helper_links">
+  <a href="/">Home</a>
+</div>

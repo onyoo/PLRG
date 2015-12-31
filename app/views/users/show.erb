@@ -2,22 +2,29 @@
 
 Categories Added: <br>
 <% @categories.uniq.each do |category|%>
-  <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
+  <div class="categories">
+    <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
+  </div>
 <% end %>
 <br>
 Topics Added: <br>
 <% @topics.uniq.each do |topic|%>
-  <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
+  <div class="topics">
+    <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
+  </div>
 <% end %>
 <br>
 Resources Added: <br>
 
 <% @resources.each do |resource|%>
-  <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
+  <div class="resources">
+    <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
+  </div>
 <% end %>
 
-  <br><br>
-  
+<br><br>
+
+<div class="helper_links">
   <a href="/users/index">User Index</a><br>
   <br><a href="/">Home</a>
-  
+</div>
