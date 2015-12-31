@@ -11,11 +11,7 @@
 
   <div>
     <% if @rights[:edit] %>
-      <a href="">Edit (no link yet)</a>
-    <% end %>
-        <br>
-    <% if @rights[:delete] %>
-      <a href="">Delete (make checkbox)</a>
+      <a href="/resources/edit_details/<%= @resource.id %>">Edit</a>
     <% end %>
   </div>
 

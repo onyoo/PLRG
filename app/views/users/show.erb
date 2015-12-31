@@ -3,14 +3,14 @@
 Member level: <%= @user.member_status %> <br><br>
 
 Categories Added: <br>
-<% @categories.uniq.each do |category|%>
+<% @info[:categories].uniq.each do |category|%>
   <div class="categories">
     <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
   </div>
 <% end %>
 <br>
 Topics Added: <br>
-<% @topics.uniq.each do |topic|%>
+<% @info[:topics].uniq.each do |topic|%>
   <div class="topics">
     <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
   </div>
@@ -18,7 +18,7 @@ Topics Added: <br>
 <br>
 Resources Added: <br>
 
-<% @resources.each do |resource|%>
+<% @info[:resources].each do |resource|%>
   <div class="resources">
     <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
   </div>

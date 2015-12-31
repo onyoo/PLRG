@@ -12,9 +12,10 @@ class Category < ActiveRecord::Base
   def self.chain_delete(params)
     categories = []
     resources = []
+    topics = []
 
-    params[:delete_categories].each{|k,v| topics = Topic.where(category_id: k)}
-    topics.each{|t| resources << Resource.where(topic_id: t.id)} unless topics == [nil]
+    params[:delete_categories].each{|k,v| topics << Topic.where(category_id: k)}
+    topics.flatten!.each{|t| resources << Resource.where(topic_id: t.id)} unless topics == [nil]
 
     params[:delete_categories].each{|k,v| Category.delete(k)} 
     topics.each{|t| Topic.delete(t.id)} unless topics == [nil]

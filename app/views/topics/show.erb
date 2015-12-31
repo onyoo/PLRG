@@ -17,7 +17,7 @@ Resources currently available:
       <% end %>
           <br>
       <% if @rights[:edit] %>
-          <a href="">edit (no link yet)</a>
+          <a href="/resources/edit/<%= resource.id %>">edit</a>
       <% end %>
           <br><br>
     <% end %>

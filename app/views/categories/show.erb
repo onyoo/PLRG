@@ -38,7 +38,7 @@ Shows all the topics in a category
       <% end %>
 
       <% if @rights[:edit] %>
-          <a href="">Edit (no link) </a>
+          <a href="/topics/edit/<%=topic.id%>">Edit </a>
       <% end %>
 
     <% end %>

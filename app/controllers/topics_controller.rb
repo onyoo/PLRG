@@ -38,8 +38,20 @@ class TopicsController < ApplicationController
   post "/topics/delete/:id" do
     if logged_in?
       Topic.chain_delete(params) # Deletes Topic and Resources owned by that Topic
-      redirect "/categories/index"
+      redirect "/categories/#{params[:id]}"
     end
+  end
+
+  get "/topics/edit/:id" do
+    if logged_in?
+      @topic = Topic.find(params[:id])
+      erb :"/topics/edit"
+    end
+  end
+
+  post "/topics/edit/:id" do
+    t = Topic.update(params[:id], name: params[:new_name])
+    redirect "/categories/#{t.category_id}"
   end
 
 end

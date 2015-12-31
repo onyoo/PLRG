@@ -40,4 +40,16 @@ class CategoriesController < ApplicationController
     end
   end
 
+  get "/categories/edit/:id" do
+    if logged_in?
+      @category = Category.find(params[:id])
+      erb :"/categories/edit"
+    end
+  end
+
+  post "/categories/edit/:id" do
+    Category.update(params[:id], name: params[:new_name])
+    redirect "/categories/index"
+  end
+
 end

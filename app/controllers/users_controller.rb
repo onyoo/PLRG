@@ -58,6 +58,7 @@ get '/signup' do
 
   get '/users/:id' do
     if logged_in?
+      @user = User.find(params[:id])
       @info = User.find_environment(params)
       erb :'/users/show'
     else redirect '/login'

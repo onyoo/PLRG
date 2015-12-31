@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
 
     def edit?(session)
       User.find(session[:id]).member_status == "Grand Master" ||
-      User.find(session[:id]).member_status == "Legend";
+      User.find(session[:id]).member_status == "Legend"
     end
 
     def create?(session)
@@ -50,7 +50,5 @@ class ApplicationController < Sinatra::Base
         {create: false, edit: false, delete: false}
       end
     end
-
   end
-
 end

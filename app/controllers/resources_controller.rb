@@ -52,4 +52,28 @@ class ResourcesController < ApplicationController
     end
   end
 
+  get "/resources/edit/:id" do
+    if logged_in?
+      @resource = Resource.find(params[:id])
+      erb :"/resources/edit"
+    end
+  end
+
+  post "/resources/edit/:id" do
+    r = Resource.update(params[:id], name: params[:new_name])
+    redirect "/topics/#{r.topic_id}"
+  end
+
+  get "/resources/edit_details/:id" do
+    if logged_in?
+      @resource = Resource.find(params[:id])
+      erb :"/resources/edit_details"
+    end
+  end
+
+  post "/resources/edit_details/:id" do
+    r = Resource.update(params[:id], name: params[:new_name], url: params[:new_url], description: params[:new_description])
+    redirect "/topics/#{r.topic_id}"
+  end
+
 end

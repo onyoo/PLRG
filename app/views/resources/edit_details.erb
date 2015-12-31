@@ -1,0 +1,6 @@
+<form action="/resources/edit_details/<%= @resource.id %>" method="POST" id="1">
+  Name: <input type="text"  name="new_name" value="<%= @resource.name %>"><br>
+  URL: <input type="text"  name="new_url" value="<%= @resource.url %>"><br>
+  Description: <textarea name="new_description" cols="30" rows="10" form="1"><%= @resource.description %></textarea><br>
+  <input type="submit" value="Submit">
+</form>
