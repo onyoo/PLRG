@@ -6,6 +6,7 @@ class ResourcesController < ApplicationController
 
   get "/resources/index" do
     if logged_in?
+      @rights = rights(session)
       @resources = Resource.all
       erb :'/resources/index'
     else

@@ -3,9 +3,22 @@
 <a href="">In the future, add comments, and reviews!</a><br><br>
   <div id="resource">
     <b>Name:</b> <a href="<%= @resource.url %>"><%= @resource.name %> <br></a>
-    <b>Description:</b> <%= @resource.description %> <br>
     <b>Address:</b> <%= @resource.url %> <br>
+    <b>Description:</b> <%= @resource.description %> <br>
   </div>
+
+  <br><br>
+
+  <div>
+    <% if @rights[:edit] %>
+      <a href="">Edit (no link yet)</a>
+    <% end %>
+        <br>
+    <% if @rights[:delete] %>
+      <a href="">Delete (make checkbox)</a>
+    <% end %>
+  </div>
+
 
   <br><br>
   <div class="helper_links">
