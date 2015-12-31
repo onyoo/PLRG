@@ -56,17 +56,10 @@ get '/signup' do
     redirect '/'
   end
 
-    get '/users/:id' do
+  get '/users/:id' do
     if logged_in?
-
-      @user = User.find(params[:id])
-      @categories = []
-
-      @topics = @user.topics.uniq
-      @resources = @user.resources.uniq
-      @topics.each{|topic| @categories << Category.find(topic.category_id)}
-
-    erb :'/users/show'
+      @info = User.find_environment(params)
+      erb :'/users/show'
     else redirect '/login'
     end
   end

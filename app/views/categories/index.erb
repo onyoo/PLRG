@@ -32,7 +32,9 @@ Categories currently available:
 
         <% end %>
       </div> <!-- .categories -->
-      <br><br><input type="submit" value="submit deletions">
+      <% if @rights[:delete]%>
+        <br><br><input type="submit" value="submit deletions">
+      <% end %>
     </form>
   </div> <!-- .show -->
   

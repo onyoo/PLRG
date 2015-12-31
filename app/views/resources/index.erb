@@ -5,8 +5,8 @@ Resources currently recommended:
   
 <% else %>
   <% @resources.each do |resource| %>
-    <div class="resource">
-      <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
-    </div>
+      <div class="resource">
+        <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
+    <% end %>
   <% end %>
 <% end %>

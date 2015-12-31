@@ -41,10 +41,14 @@ class ApplicationController < Sinatra::Base
     end
 
     def rights(session)
-      create = true if create?(session)
-      edit = true if edit?(session)
-      delete = true if delete?(session)
-      {create: create, edit: edit, delete: delete}
+      if logged_in?
+        create = true if create?(session)
+        edit = true if edit?(session)
+        delete = true if delete?(session)
+        {create: create, edit: edit, delete: delete}
+      else
+        {create: false, edit: false, delete: false}
+      end
     end
 
   end

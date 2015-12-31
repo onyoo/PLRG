@@ -6,10 +6,6 @@ class ResourcesController < ApplicationController
 
   get "/resources/index" do
     if logged_in?
-      @create = 1 if create?(session)
-      @edit = 1 if edit?(session)
-      @delete = 1 if delete?(session)
-      
       @resources = Resource.all
       erb :'/resources/index'
     else
@@ -17,7 +13,6 @@ class ResourcesController < ApplicationController
     end
     
   end
-
 
   get '/resources/:id/create' do
     if logged_in?
@@ -41,6 +36,7 @@ class ResourcesController < ApplicationController
 
   get '/resources/:id' do
     if logged_in?
+    @rights = rights(session)
     @resource = Resource.find(params[:id])
     @topic = Topic.find(@resource.topic_id)
     erb :'/resources/show'

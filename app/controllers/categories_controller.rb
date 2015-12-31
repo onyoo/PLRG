@@ -5,9 +5,7 @@ class CategoriesController < ApplicationController
   end
 
   get "/categories/index" do
-    if logged_in?
-      @rights = rights(session)
-    end
+    @rights = rights(session)
     @categories = Category.all
     erb :'/categories/index'
   end
@@ -28,28 +26,15 @@ class CategoriesController < ApplicationController
   end
 
   get '/categories/:id' do
-    if logged_in?
-      @rights = rights(session)
-    end
-      @category = Category.find(params[:id])
-      @topics = Topic.where(category_id: params[:id])
-      erb :"/categories/show"
+    @rights = rights(session)
+    @info = Category.find_environment(params)
+    erb :"/categories/show"
   end
 
   post "/categories/delete" do
     if logged_in?
       if params[:delete_categories] != {}
-        @categories = []
-        @topics = []
-        @resources = []
-
-        params[:delete_categories].each{|k,v| @topics << Topic.find_by(category_id: k)}
-        @topics.each{|t| @resources << Resource.where(topic_id: t.id)} unless @topics == [nil]
-
-        params[:delete_categories].each{|k,v| Category.delete(k)} 
-        @topics.each{|t| Topic.delete(t.id)} unless @topics == [nil]
-        @resources[0].each{|r| Resource.delete(r.id)} unless @resources == []
-
+        Category.chain_delete(params) # Deletes Category, Topics, and Resources owned by that Category
       end
       redirect "/categories/index"
     end
