@@ -22,7 +22,7 @@ get '/signup' do
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:password] == "" || params[:email] == "" || params[:first_name] == ""
+    if User.empty_signup?(params)
       erb :'/users/signup', :locals => {:message => "*** Please fill-in all fields. ***"}
     elsif !User.find_by(username: params[:username])
       @user = User.create(username: params[:username], password: params[:password], email: params[:email], first_name: params[:first_name], last_name: params[:last_name], member_status: "Little Grasshopper")

@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>PLRG</title>
-                                <!-- doesn't link -->
-    <link rel="stylesheet" href="/public/stylesheets/layout.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="/stylesheets/layout.css" />
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
   <body>
-    <nav id="header" >
+    <nav id="login" >
       <% if logged_in? %>
 
         <a href="/">Home</a> -
@@ -19,17 +21,20 @@
       <%end %>
 
     </nav>
+
     <div class="container">
-      <h1>Pre-Learning Resource Guide</h1>
-      <% if !@error_message.nil? %>
-      <div class="alert alert-warning">
-        <%= @error_message %>
+      <div id="banner">
+        <h1>Pre-Learning Resource Guide</h1>
+        <% if !@error_message.nil? %>
+          <div class="alert alert-warning">
+            <%= @error_message %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
 
-
-      <%= yield %> 
-
+      <div id="content">
+        <%= yield %> 
+      </div>
       
     <br><br><br>
     <div id="slogan">This site, made possible by you.</div>

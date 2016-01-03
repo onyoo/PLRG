@@ -16,4 +16,8 @@ has_secure_password
     {topics: topics, resources: resources, categories: categories}
   end
 
+  def self.empty_signup?(params)
+    params[:username] == "" || params[:password] == "" || params[:email] == "" || params[:first_name] == ""
+  end
+
 end
