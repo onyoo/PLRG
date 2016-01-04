@@ -1,27 +1,29 @@
-<h3><%= @user.username %>'s Profile:</h3>
+<h3 id="username"><%= @user.username %>'s Profile:</h3>
 
-Member Level: <%= @user.member_status %> <br><br>
+<p id="user_level">Member Level: <%= @user.member_status %> </p>
 
 <h4 class="user_headers">Categories Added:</h4> <br>
 <% @info[:categories].uniq.each do |category|%>
-  <div class="categories">
-    <a href="/categories/<%= category.id %>"><%= category.name %></a> <br>
-  </div>
+  <div class="user_links">
+    <a href="/categories/<%= category.id %>"><%= category.name %></a>
+  </div>  <!-- .user_links -->
 <% end %>
 <br>
 <h4 class="user_headers">Topics Added:</h4> <br>
 <% @info[:topics].uniq.each do |topic|%>
-  <div class="topics">
-    <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
-  </div>
+  <div class="user_links">
+    <div class="topics">
+      <a href="/topics/<%= topic.id %>"><%= topic.name %></a> <br>
+    </div>
+  </div> <!-- .user_links -->
 <% end %>
 <br>
 <h4 class="user_headers">Resources Added:</h4> <br>
 
 <% @info[:resources].each do |resource|%>
-  <div class="resources">
+  <div class="user_links">
     <a href="/resources/<%= resource.id %>"><%= resource.name %></a> <br>
-  </div>
+  </div> <!-- .user_links -->
 <% end %>
 
 <br><br>
