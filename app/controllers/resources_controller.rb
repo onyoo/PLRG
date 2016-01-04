@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
   get "/resources/index" do
     if logged_in?
       @rights = rights(session)
-      @resources = Resource.all
+      @resources = Resource.all.sort_by{|word| word.name.downcase}
       erb :'/resources/index'
     else
       redirect '/login'

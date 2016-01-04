@@ -8,18 +8,23 @@ Resources currently available:
 
 <div class="form">
   <form action="/resources/delete/<%= @info[:topic].id %>" method="POST">
+
     <% @info[:resources].each do |resource| %>
-    
-      <br><a href="/resources/<%=resource.id%>"><%= resource.name %></a>
-          <br>
-      <% if @rights[:delete] %>
-          Delete<input type="checkbox" name="delete_resources[<%=resource.id%>]">
-      <% end %>
-          <br>
-      <% if @rights[:edit] %>
-          <a href="/resources/edit/<%= resource.id %>">edit</a>
-      <% end %>
-          <br><br>
+      <div class="resource">
+        <div class="resource_name">
+          <a href="/resources/<%=resource.id%>"><%= resource.name %></a>
+        </div> <!-- .resource_name -->
+        
+        <div class="edit_feature">
+          <% if @rights[:delete] %>
+              Delete<input class="delete" type="checkbox" name="delete_resources[<%=resource.id%>]">
+          <% end %>
+              <br>
+          <% if @rights[:edit] %>
+              <a class="edit" href="/resources/edit/<%= resource.id %>">edit</a>
+          <% end %>
+        </div> <!-- .eadit_feature -->
+      </div> <!-- .resource -->
     <% end %>
 
     <% if @rights[:delete] %>

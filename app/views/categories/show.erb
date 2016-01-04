@@ -31,16 +31,19 @@ Shows all the topics in a category
   <form action="/topics/delete/<%=@info[:category].id%>" method="POST">
     <% @info[:topics].each do |topic| %>
       <div class="topic">
-        <br><a href="/topics/<%=topic.id%>"><%= topic.name %></a>
-      </div>
-      <% if @rights[:delete] %>
-          Delete<input type="checkbox" name="delete_topics[<%=topic.id%>]">
-      <% end %>
+        <div class="topic_name">
+          <br><a href="/topics/<%=topic.id%>"><%= topic.name %></a>
+        </div> <!-- .topic_name -->
+        <div class="edit_feature">
+          <% if @rights[:delete] %>
+              Delete<input class="delete" type="checkbox" name="delete_topics[<%=topic.id%>]">
+          <% end %>
 
-      <% if @rights[:edit] %>
-          <a href="/topics/edit/<%=topic.id%>">Edit </a>
-      <% end %>
-
+          <% if @rights[:edit] %>
+              <a class="edit" href="/topics/edit/<%=topic.id%>">Edit </a>
+          <% end %>
+        </div> <!-- .edit_feature -->
+      </div> <!-- .topic -->
     <% end %>
     <% if @rights[:delete] %>
       <br><br><input type="submit" value="submit deletions">

@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
 
   def self.find_environment(params)
     category = Category.find(params[:id])
-    topics = Topic.where(category_id: params[:id])
+    topics = Topic.where(category_id: params[:id]).sort_by{|word| word.name.downcase}
 
     {category: category, topics: topics}
   end

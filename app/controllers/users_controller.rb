@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   get "/users/index" do
     if logged_in?
-      @users = User.all
+      @users = User.all.sort_by{|word| word.username.downcase}
       erb :'/users/index'
     else
       redirect '/login'

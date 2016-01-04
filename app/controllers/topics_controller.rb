@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   end
 
   get "/topics/index" do
-    @topics = Topic.all
+    @topics = Topic.all.sort_by{|word| word.name.downcase}
     erb :'/topics/index'
   end
 

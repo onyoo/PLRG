@@ -1,8 +1,6 @@
 
 body {
-  background-image: url("/images/british_lib.jpg");
-  background-repeat: no-repeat;
-  background-position: center fixed;
+  background-image: url("/images/british_lib_shade.jpg");
   background-size: cover;
   width: 100%;
 }
@@ -11,46 +9,227 @@ body {
   text-align: right;
   position: fixed;
   z-index: 100;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 15px;
 }
 
 #banner {
-  background-color: white;
+  background-color: #F4F5F9;
   position: fixed;
   width: 100%;
+  height: 90px;
+  border: 5px solid #0F1871;
   top: 0;
+  box-sizing: border-box;
+}
+
+#title {
+  padding: 0 0 0 3%;
+  vertical-align: middle;
 }
 
 #content {
-  background-color: rgb(248,248,248);
-  width: 100%;
-  border: 20px, solid, black;
-  margin-top: 100px;
+  background-color: #F4F5F9;
+  margin: 100px 2.5% 0;
+  border: 5px solid #97C9E8;
   padding: 2%;
+  width: 90%;
+  /*box-sizing: border-box;*/
 }
 
 #slogan {
-  background-color: lightblue;
+  background-color: #97C9E8;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
+a#logout, a#home {
+  font: bold 1em Arial;
+  background-color: #FCB757;
+  border-radius: 5px;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
+a#logout:hover {
+  background-color: red;
+}
+
+a#home:hover {
+  background-color: lightgreen;
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         /*Categories*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 .category {
+  border: 1px solid #453024;
+  margin-bottom: .5em;
+  border-radius: 5px;
+  background-color: #98A2AA;
+
+  box-sizing: border-box;
+  display: inline-table;
+  width: 49.8%;
+}
+
+.category_name {
   font-weight: bold;
   font-size: 1.5em;
   font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  padding-bottom: 1em;
+  background-color: #B1BAC5;
+  width: 80%;
+  border-radius: 5px;
+
+  display: inline-block;
+  vertical-align: center;
 }
+
+.edit_feature {
+  float: right;
+}
+
+.delete {
+  display: inline-block;
+}
+
+.edit {
+  display: block;
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         /*Topics*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+.topic {
+  border: 1px solid #453024;
+  margin-bottom: .5em;
+  border-radius: 5px;
+  background-color: #82A0C6;
+
+  box-sizing: border-box;
+  display: inline-table;
+  width: 49.8%;
+}
+
+.topic_name {
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  padding-bottom: 1em;
+  background-color: #B9C1D4;
+  width: 80%;
+  border-radius: 5px;
+
+  display: inline-block;
+  vertical-align: center;
+}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         /*Resources*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.resource {
+  border: 1px solid #453024;
+  margin-bottom: .5em;
+  border-radius: 5px;
+  background-color: #DCD0BB;
+
+  box-sizing: border-box;
+  display: inline-table;
+  width: 49.8%;
+}
+
+.resource_name {
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #AAB2CC;
+  width: 80%;
+  border-radius: 5px;
+
+  display: inline-block;
+  vertical-align: center;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+          /*Users*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.user_headers {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+    /* Interactive CSS */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+@media only screen and (max-width: 750px) {
+  .category_name, .topic_name, .resource_name{
+    width: 200px;
+    height: 96px;
+    overflow: scroll;
+    padding-top: .3em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #banner {
+    padding-top: .7em;
+  }
+
+  #banner h1 {
+    font-size: 1.5em;
+    width: 100%;
+  }
+}
+
+
+@media only screen and (max-width: 650px) {
+  #banner {
+    padding-top: .8em;
+  }
+
+  #banner h1 {
+    font-size: 1.4em;
+    width: 100%;
+  }
+
+  .category, .topic, .resource{
+    width: 200px;
+  }
+
+  .edit_feature {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  #banner h1 {
+    margin-top: .45em;
+    visibility: hidden;
+  }
+  #banner h1:before {
+    content: "PLRG";
+    visibility: visible;
+    font-size: 1.4em;
+    width: 100%;
+  }
+}

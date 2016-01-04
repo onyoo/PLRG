@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 
   get "/categories/index" do
     @rights = rights(session)
-    @categories = Category.all
+    @categories = Category.all.sort_by{|word| word.name.downcase}
     erb :'/categories/index'
   end
 

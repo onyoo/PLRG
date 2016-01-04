@@ -16,25 +16,27 @@ Categories currently available:
 <% else %>
   <div class="show">
     <form action="/categories/delete" method="POST">
-      <div class="categories"></div>
         <% @categories.each do |category| %>
           <div class="category">
-            <br><a href="/categories/<%=category.id%>"><%= category.name %></a>
+            <div class="category_name">
+              <br><a href="/categories/<%=category.id%>"><%= category.name %></a>
+            </div> <!-- .category_name -->
+
+            <div class="edit_feature">
+              <% if @rights[:delete] %>
+                Delete<input class="delete" type="checkbox" name="delete_categories[<%=category.id%>]">
+              <% end %>
+
+              <% if @rights[:edit] %>
+                <a class="edit" href="/categories/edit/<%= category.id %>">Edit</a>
+              <% end %>
+            </div> <!-- .edit_feature -->
           </div> <!-- .category -->
+        <% end %> <!-- categories.each -->
 
-          <% if @rights[:delete] %>
-            Delete<input type="checkbox" name="delete_categories[<%=category.id%>]">
-          <% end %>
-              <br>
-          <% if @rights[:edit] %>
-            <a href="/categories/edit/<%= category.id %>">Edit</a>
-          <% end %>
-
+        <% if @rights[:delete]%>
+          <br><br><input type="submit" value="submit deletions">
         <% end %>
-      </div> <!-- .categories -->
-      <% if @rights[:delete]%>
-        <br><br><input type="submit" value="submit deletions">
-      <% end %>
     </form>
 
   <div class="helper_links">
