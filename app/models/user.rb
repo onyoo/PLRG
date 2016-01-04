@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :topics
   has_many :categories, through: :topics
-  has_many :resources, through: :topics
+  has_many :resources
 
 has_secure_password
 
@@ -20,4 +20,10 @@ has_secure_password
     params[:username] == "" || params[:password] == "" || params[:email] == "" || params[:first_name] == ""
   end
 
+  def self.check_upgrade(session)
+    user = User.find(session[:id])
+    user.member_status = "Legend" if user.resources.count > 4
+    user.member_status = "Grand Master" if user.resources.count > 9
+    user.save
+  end
 end

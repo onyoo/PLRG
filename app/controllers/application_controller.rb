@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
     def create?(session)
       User.find(session[:id]).member_status == "Grand Master" ||
       User.find(session[:id]).member_status == "Legend" ||
-      User.find(session[:id]).member_status == "Monk"
+      User.find(session[:id]).member_status == "Little Grasshopper"
     end
 
     def rights(session)

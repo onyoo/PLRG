@@ -25,7 +25,9 @@ class ResourcesController < ApplicationController
   post "/resources/:id/create" do
     if logged_in?
       if params[:name] != "" && params[:url] != "" && params[:description] != "" && params[:id] != ""
-        Resource.create(name: params[:name], url: params[:url], description: params[:description], topic_id: params[:id])
+        Resource.create(name: params[:name], url: params[:url], description: params[:description], topic_id: params[:id], user_id: session[:id])
+        User.check_upgrade(session)
+        binding.pry
         redirect "/topics/#{params[:id]}"
       else
         @topic = Topic.find(params[:id])
