@@ -17,7 +17,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.include Rack::Test::Methods
   config.include Capybara::DSL
-  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.strategy = :truncation   #### testing has problem with this line
 
   config.before do
     DatabaseCleaner.clean
