@@ -1,25 +1,12 @@
 class Category < ActiveRecord::Base
-  has_many :topics
+  has_many :topics, dependent: :destroy
 
-  def self.find_environment(params)
-    category = Category.find(params[:id])
-    topics = Topic.where(category_id: params[:id]).sort_by{|word| word.name.downcase}
-
-    {category: category, topics: topics}
+  def self.in_alphabetical_order
+    order(:name)
   end
 
-
-  def self.chain_delete(params)
-    categories = []
-    resources = []
-    topics = []
-
-    params[:delete_categories].each{|k,v| topics << Topic.where(category_id: k)}
-    topics.flatten!.each{|t| resources << Resource.where(topic_id: t.id)} unless topics == [nil]
-
-    params[:delete_categories].each{|k,v| Category.delete(k)} 
-    topics.each{|t| Topic.delete(t.id)} unless topics == [nil]
-    resources[0].each{|r| Resource.delete(r.id)} unless resources == []
+  def self.delete_all(params)
+    params[:delete_categories].each{ |k,v| Category.destroy(k) }
   end
 
 end

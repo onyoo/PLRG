@@ -1,13 +1,9 @@
 class ResourcesController < ApplicationController
 
-  def slug
-    self.name.gsub(/\ /,"-").downcase
-  end
-
   get "/resources/index" do
     if logged_in?
       @rights = rights(session)
-      @resources = Resource.all.sort_by{|word| word.name.downcase}
+      @resources = Resource.in_alphabetical_order
       erb :'/resources/index'
     else
       redirect '/login'
@@ -17,17 +13,16 @@ class ResourcesController < ApplicationController
 
   get '/resources/:id/create' do
     if logged_in?
-      @topic = Topic.find(params[:id]) #Coded also in  post "/resources/:id/create"
+      @topic = Topic.find(params[:id])
       erb :'resources/create'
     end  
   end
 
   post "/resources/:id/create" do
     if logged_in?
-      if params[:name] != "" && params[:url] != "" && params[:description] != "" && params[:id] != ""
+      if Resource.not_empty?(params)
         Resource.create(name: params[:name], url: params[:url], description: params[:description], topic_id: params[:id], user_id: session[:id])
         User.check_upgrade(session)
-        binding.pry
         redirect "/topics/#{params[:id]}"
       else
         @topic = Topic.find(params[:id])
@@ -39,17 +34,16 @@ class ResourcesController < ApplicationController
 
   get '/resources/:id' do
     if logged_in?
-    @rights = rights(session)
-    @resource = Resource.find(params[:id])
-    @topic = Topic.find(@resource.topic_id)
-    erb :'/resources/show'
+      @rights = rights(session)
+      @resource = Resource.find(params[:id])
+      erb :'/resources/show'
     else redirect '/login'
     end
   end
 
   post "/resources/delete/:id" do
     if logged_in?
-      params[:delete_resources].each{|k,v| Resource.delete(k)}
+      Resource.delete_all(params)
       redirect "/topics/#{params[:id]}"
     end
   end

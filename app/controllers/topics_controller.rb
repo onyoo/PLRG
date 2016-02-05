@@ -1,11 +1,8 @@
 class TopicsController < ApplicationController
 
-  def slug
-    self.name.gsub(/\ /,"-").downcase
-  end
 
   get "/topics/index" do
-    @topics = Topic.all.sort_by{|word| word.name.downcase}
+    @topics = Topic.in_alphabetical_order
     erb :'/topics/index'
   end
 
@@ -29,7 +26,7 @@ class TopicsController < ApplicationController
   get '/topics/:id' do
     if logged_in?
       @rights = rights(session)
-      @info = Topic.find_environment(params) #returns all categories, topics, and resources in a hash
+      @topic = Topic.find(params[:id]) #returns all categories, topics, and resources in a hash
       erb :'/topics/show'
     else redirect '/login'
     end
@@ -37,7 +34,7 @@ class TopicsController < ApplicationController
 
   post "/topics/delete/:id" do
     if logged_in?
-      Topic.chain_delete(params) # Deletes Topic and Resources owned by that Topic
+      Topic.delete_all(params) # Deletes all Topics and Resources owned by that Topic
       redirect "/categories/#{params[:id]}"
     end
   end

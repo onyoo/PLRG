@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 has_secure_password
 
   def self.find_environment(params)
-    user = User.find(params[:id])
+    user = self.find(params[:id])
       categories = []
 
       topics = user.topics.uniq
@@ -21,9 +21,9 @@ has_secure_password
   end
 
   def self.check_upgrade(session)
-    user = User.find(session[:id])
-    user.member_status = "Legend" if user.resources.count > 4
-    user.member_status = "Grand Master" if user.resources.count > 9
+    user = self.find(session[:id])
+    user.member_status = "Legend" if user.resources.count > 2
+    user.member_status = "Grand Master" if user.resources.count > 3
     user.save
   end
 end

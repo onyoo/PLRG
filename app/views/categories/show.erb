@@ -1,6 +1,6 @@
 Shows all the topics in a category
 
-<h3>Welcome to the <%= @info[:category].name %> index!</h3>
+<h3>Welcome to the <%= @category.name %> index!</h3>
 
 <% unless locals.empty? %>
   <div class="error">
@@ -8,28 +8,28 @@ Shows all the topics in a category
   </div>
 <% end %>
 
-<% if @info[:topics] == [] %>
+<% if @category.topics == [] %>
   <div class="create">
-    No topics yet... <a href="/topics/<%= @info[:category].id %>/create">Want to make one?</a>
+    No topics yet... <a href="/topics/<%= @category.id %>/create">Want to make one?</a>
   </div>
 
 <% else %>
   <% if @rights[:edit] %>
     <div class="create">
-      <a href="/topics/<%= @info[:category].id %>/create">Create a new topic!</a>
+      <a href="/topics/<%= @category.id %>/create">Create a new topic!</a>
     </div>
   <% end %>
 
   Topics currently available:
 
-  <% if @info[:topics] == [] %>
+  <% if @category.topics == [] %>
     <div class="create">
-      Well this is emberrassing. There are none to show at the moment... <a href="/topics/<%= @info[:category].id %>/create">Want to make one?</a>
+      Well this is emberrassing. There are none to show at the moment... <a href="/topics/<%= @category.id %>/create">Want to make one?</a>
     </div>
   <% else %>
 
-  <form action="/topics/delete/<%=@info[:category].id%>" method="POST">
-    <% @info[:topics].each do |topic| %>
+  <form action="/topics/delete/<%=@category.id%>" method="POST">
+    <% @category.topics.each do |topic| %>
       <div class="topic">
         <div class="topic_name">
           <br><a href="/topics/<%=topic.id%>"><%= topic.name %></a>

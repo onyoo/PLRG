@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
 
-  def slug
-    self.name.gsub(/\ /,"-").downcase
-  end
-
   get "/users/index" do
     if logged_in?
       @users = User.all.sort_by{|word| word.username.downcase}
@@ -26,7 +22,7 @@ get '/signup' do
       erb :'/users/signup', :locals => {:message => "*** Please fill-in all fields. ***"}
     elsif !User.find_by(username: params[:username])
       @user = User.create(username: params[:username], password: params[:password], email: params[:email], first_name: params[:first_name], last_name: params[:last_name], member_status: "Little Grasshopper")
-      session[:id] = @user[:id]
+      login(@user)
       redirect "/"
     else
       erb :'/users/signup', :locals => {:message => "*** It seems that username already exists. Try logging-in? ***"}
@@ -44,7 +40,8 @@ get '/signup' do
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user[:id]
+      login(@user)
+
       redirect "/"
     else
       erb :'/users/login', :locals => {:message => "*** The username and password provided do not match. Please try again. ***"} 
@@ -59,7 +56,7 @@ get '/signup' do
   get '/users/:id' do
     if logged_in?
       @user = User.find(params[:id])
-      @info = User.find_environment(params)
+      @info = User.find_environment(params) # finds uniq categories, topics, and resources
       erb :'/users/show'
     else redirect '/login'
     end

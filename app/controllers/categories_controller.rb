@@ -1,17 +1,15 @@
 class CategoriesController < ApplicationController
 
-  def slug
-    self.name.gsub(/\ /,"-").downcase
-  end
 
   get "/categories/index" do
     @rights = rights(session)
-    @categories = Category.all.sort_by{|word| word.name.downcase}
+    @categories = Category.in_alphabetical_order
     erb :'/categories/index'
   end
 
   get "/categories/create" do
     if logged_in?
+      binding.pry
       erb :'/categories/create'
     else redirect '/login'
     end
@@ -27,14 +25,14 @@ class CategoriesController < ApplicationController
 
   get '/categories/:id' do
     @rights = rights(session)
-    @info = Category.find_environment(params)
+    @category = Category.find(params[:id])
     erb :"/categories/show"
   end
 
   post "/categories/delete" do
     if logged_in?
       if params[:delete_categories] != {}
-        Category.chain_delete(params) # Deletes Category, Topics, and Resources owned by that Category
+        Category.delete_all(params)  # Deletes each category from form
       end
       redirect "/categories/index"
     end
